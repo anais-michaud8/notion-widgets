@@ -7,7 +7,7 @@
 
 <!--- Script for the Sunrise/Sunset: By Anaïs Michaud --->
 	
-<script>
+<!-- <script>
 // Coordinates for Coventry, UK (adjust for your own location)
 // You can use Google Maps to get your coordinates
 const latitude = 52.419048;
@@ -28,10 +28,18 @@ fetch(url)
 		})
 	.catch(error => console.error('Error with sun:', error));
 </script>
-
+-->
+	
 <!--- Script for the Moon: By Anaïs Michaud --->
 
 <script>
+
+	// Coordinates for Coventry, UK (adjust for your own location) -> You can use Google Maps to get your coordinates
+	const latitude = 52.419048;
+	const longitude = -1.529008;
+	const timezone = "Etc/GMT-0";
+	const date = "today";
+	const time_format = "24";
 
 	// Images of the moon
 	const moon_new             = "https://cdn-icons-png.flaticon.com/512/616/616465.png"; // https://www.flaticon.com/free-icon/moon_616465
@@ -43,22 +51,50 @@ fetch(url)
 	const moon_last_quarter    = "https://cdn-icons-png.flaticon.com/512/616/616461.png"; // https://www.flaticon.com/free-icon/moon_616461
 	const moon_waning_crescent = "https://cdn-icons-png.flaticon.com/512/616/616463.png"; // https://www.flaticon.com/free-icon/moon_616463
 
-	// URL to get data for moon
-	const url_moon = "https://moon-api.co/";
-
+	// URL
+	const KEY = "TZYHDL4PS29CM3UCGHUKYNX4N";
+	const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${latitude},${longitude}?key=${KEY}&include=days&elements=datetime,moonphase,sunrise,sunset`
+	
 	// Parse the JSON data to obtain the data for displaying the results in the widget
-	fetch(url_moon)
+	fetch(url)
 	.then(response => response.json())
 	.then(data => {
-		console.log("Data: " + data);
-		if (data.phase == "new") {
-			document.querySelector('#moon_img').src = moon_new;
-			document.querySelector('#moon_data').innerHTML = "New Moon";
+		document.querySelector('#sunrise').innerHTML = data.days[0].sunrise
+		document.querySelector('#sunset').innerHTML = data.days[0].sunset
+		document.querySelector('#percent').innerHTML = data.days[0].moonphase*100
+		if (data.days[0].moonphase<0.025 || data.days[0].moonphase>=0.975) {
+			document.querySelector('#image').src = moon_new;
+			document.querySelector('#phase').innerHTML = "New Moon";
 		}
-		else {
-			document.querySelector('#moon_img').src = moon_full;
-			document.querySelector('#moon_data').innerHTML = "Full Moon";
+		else if (data.days[0].moonphase>=0.025 && data.days[0].moonphase<0.225) {
+			document.querySelector('#image').src = moon_waxing_crescent;
+			document.querySelector('#phase').innerHTML = "Waxing Crescent";
 		}
+		else if (data.days[0].moonphase>=0.225 && data.days[0].moonphase<0.275) {
+			document.querySelector('#image').src = moon_first_quarter;
+			document.querySelector('#phase').innerHTML = "First Quarter";
+		}
+		else if (data.days[0].moonphase>=0.275 && data.days[0].moonphase<0.475) {
+			document.querySelector('#image').src = moon_waxing_gibbous;
+			document.querySelector('#phase').innerHTML = "Waxing Gibbous";
+		}
+		else if (data.days[0].moonphase>=0.475 && data.days[0].moonphase<0.525) {
+			document.querySelector('#image').src = moon_full;
+			document.querySelector('#phase').innerHTML = "Full Moon";
+		}
+		else if (data.days[0].moonphase>=0.525 && data.days[0].moonphase<0.725) {
+			document.querySelector('#image').src = moon_waning_gibbous;
+			document.querySelector('#phase').innerHTML = "Waxing Gibbous";
+		}
+		else if (data.days[0].moonphase>=0.725 && data.days[0].moonphase<0.775) {
+			document.querySelector('#image').src = moon_last_quarter;
+			document.querySelector('#phase').innerHTML = "Last Quarter";
+		}
+		else if (data.days[0].moonphase>=0.775 && data.days[0].moonphase<0.975) {
+			document.querySelector('#image').src = moon_waning_crescent;
+			document.querySelector('#phase').innerHTML = "Waxing Crescent";
+		}
+		
 	})
 	.catch(error => console.error('Error with moon:', error));
 	
@@ -123,9 +159,9 @@ img.icon {
 		</span>	
 		<span class="block">
 			<!--- Flaticon (Moon): See script --->
-			<img class="icon" id="moon_img" src="https://cdn-icons-png.flaticon.com/512/616/616465.png">
-      		<div class="label">Moon</div>
-			<div id="moon_data" class="data"></div>
+			<img class="icon" id="image" src="https://cdn-icons-png.flaticon.com/512/616/616465.png">
+      		<div class="label">Moon: <span id="percent">...</span>%</div>
+			<div id="phase" class="data"></div>
 		</span>	
 	</div>
 	
