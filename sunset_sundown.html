@@ -44,10 +44,10 @@ fetch(url)
 	const moon_waning_crescent = "https://cdn-icons-png.flaticon.com/512/616/616463.png"; // https://www.flaticon.com/free-icon/moon_616463
 
 	// URL to get data for moon
-	const url = "https://moon-api.co/";
+	const url_moon = "https://moon-api.co/";
 
 	// Parse the JSON data to obtain the data for displaying the results in the widget
-	fetch(url)
+	fetch(url_moon)
 	.then(response => response.json())
 	.then(data => {
 		console.log("Data: " + data);
