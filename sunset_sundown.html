@@ -1,9 +1,12 @@
-<!--- Source: --->
+<!--- Source: https://codepen.io/ClassyUX/pen/NWmEEYg + HTML/CSS Edited by me --->
 <!--- Embed link: https://anais-michaud8.github.io/notion-widgets/sunset_sundown.html --->
 <html>
 <head>
 </head>
 <body>
+
+<!--- JS: From --->
+	
 <script>
 // Get today and tomorrow's date
 const date = new Date();
@@ -30,10 +33,11 @@ fetch(url)
 		document.querySelector('#sunsettomorrow').innerHTML = data.results[1].sunset	
 		})
 	.catch(error => console.error('Error:', error));
-
 </script>
+
+<!--- CSS: By Anaïs Michaud and https://codepen.io/ClassyUX/pen/NWmEEYg --->
 <style>
-	body {
+body {
 	color: #FAFAFA;
 	font-family: sans-serif;
 	margin: 30px 0 0;
@@ -92,22 +96,20 @@ img.icon {
 	border-radius: 1em;
 	}
 </style>
-<div class="container">
-	<img src="https://cdn-icons-png.flaticon.com/512/169/169947.png" class="icon">
-	<div class="time-row">
+
+<!--- HTML: By Anaïs Michaud --->
+
+	<div class="container">
+		<img src="https://cdn-icons-png.flaticon.com/512/4814/4814444.png">
 		<div class="block">
-			<div class="label">Sunrise Today</div>
-			<div class="data">
-				<strong><span id="sunrise"></span></strong>
-			</div>
-		</div>
+			<img src="https://cdn-icons-png.flaticon.com/512/4814/4814444.png">
+			<span id="sunrise" class="data"></span>
+		</div>		
 		<div class="block">
-			<div class="label">Sunset Today</div>
-			<div class="data">
-				<strong><span id="sunset"></span></strong>
-			</div>
-		</div>
+			<img src="https://cdn-icons-png.flaticon.com/512/4814/4814444.png">
+			<span id="sunrise" class="data"></span>
+		</div>	
 	</div>
-</div>
+	
 </body>
 </html>
