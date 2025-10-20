@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<!--- JS: By Anaïs Michaud --->
+<!--- Script for the Sunrise/Sunset: By Anaïs Michaud --->
 	
 <script>
 // Coordinates for Coventry, UK (adjust for your own location)
@@ -27,6 +27,37 @@ fetch(url)
 		document.querySelector('#sunset').innerHTML = data.results.sunset
 		})
 	.catch(error => console.error('Error:', error));
+</script>
+
+<!--- Script for the Moon: By Anaïs Michaud --->
+
+<script>
+
+	// Images of the moon
+	const moon_img_100 = "https://cdn-icons-png.flaticon.com/512/3920/616456.png"; // https://www.flaticon.com/free-icon/full-moon_616456
+	const moon_img_75  = "https://cdn-icons-png.flaticon.com/512/3920/616459.png"; // https://www.flaticon.com/free-icon/moon_616459
+	const moon_img_50  = "https://cdn-icons-png.flaticon.com/512/3920/616461.png"; // https://www.flaticon.com/free-icon/moon_616461
+	const moon_img_25  = "https://cdn-icons-png.flaticon.com/512/3920/616463.png"; // https://www.flaticon.com/free-icon/moon_616463
+	const moon_new   = "https://cdn-icons-png.flaticon.com/512/3920/616465.png"; // https://www.flaticon.com/free-icon/moon_616465
+
+	// URL to get data for moon
+	const url = "https://moon-api.co/";
+
+	// Parse the JSON data to obtain the data for displaying the results in the widget
+	fetch(url)
+	.then(response => response.json())
+	.then(data => {
+		if (data.phase == "new") {
+			document.querySelector('#moon_img').src = moon_new;
+			document.querySelector('#moon_data').innerHTML = "New Moon";
+		}
+		else {
+			document.querySelector('#moon_img').src = moon_full;
+			document.querySelector('#moon_data').innerHTML = "Full L;
+		}
+	})
+	.catch(error => console.error('Error:', error));
+	
 </script>
 
 <!--- CSS: By Anaïs Michaud and https://codepen.io/ClassyUX/pen/NWmEEYg --->
@@ -77,14 +108,20 @@ img.icon {
 		<span class="block">
 			<!--- Flaticon (Sunrise): https://www.flaticon.com/free-icon/sunrise_3920688 --->
 			<img class="icon" src="https://cdn-icons-png.flaticon.com/512/3920/3920688.png">
-      <div class="label">Sunrise</div>
+			<div class="label">Sunrise</div>
 			<div id="sunrise" class="data"></div>
 		</span>		
 		<span class="block">
 			<!--- Flaticon (Sunset): https://www.flaticon.com/free-icon/sunset_3920799 --->
 			<img class="icon" src="https://cdn-icons-png.flaticon.com/512/3920/3920799.png">
-      <div class="label">Sunset</div>
+      		<div class="label">Sunset</div>
 			<div id="sunset" class="data"></div>
+		</span>	
+		<span class="block">
+			<!--- Flaticon (Moon): See script --->
+			<img class="icon" id="moon_img" src="https://cdn-icons-png.flaticon.com/512/3920/616465.png">
+      		<div class="label">Moon</div>
+			<div id="moon_data" class="data"></div>
 		</span>	
 	</div>
 	
