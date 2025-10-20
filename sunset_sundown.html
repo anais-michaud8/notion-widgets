@@ -1,0 +1,105 @@
+<script>
+	// Get today and tomorrow's date
+const date = new Date();
+const datestring = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+let tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+const tomorrowstring = tomorrow.getFullYear() + "-" + (tomorrow.getMonth() + 1) + "-" + tomorrow.getDate();
+
+// Coordinates for Jamestown, NY (adjust for your own location)
+// You can use Google Maps to get your coordinates
+const latitude = 52.419048;
+const longitude = -1.529008;
+
+// Construct URL and parameters to fetch the sunrise and sunset data from the free api at sunrisesunset.io
+const url = `https://api.sunrisesunset.io/json?lat=${latitude}&lng=${longitude}&date_start=${datestring}&date_end=${tomorrowstring}`;
+
+// Parse the JSON data to obtain the data for displaying the results in the widget
+fetch(url)
+	.then(response => response.json())
+	.then(data => {
+		document.querySelector('#sunrise').innerHTML = data.results[0].sunrise
+		document.querySelector('#sunset').innerHTML = data.results[0].sunset
+		document.querySelector('#sunrisetomorrow').innerHTML = data.results[1].sunrise
+		document.querySelector('#sunsettomorrow').innerHTML = data.results[1].sunset	
+		})
+	.catch(error => console.error('Error:', error));
+
+</script>
+<style>
+	body {
+	color: #FAFAFA;
+	font-family: sans-serif;
+	margin: 30px 0 0;
+	}
+p {
+	max-width: 580px;
+	margin: 0 auto 30px;
+	color: #000000;
+	}
+img.icon {
+	width: 150px;
+	filter: invert(1);
+	}
+.container {
+	container-name: maincontainer;
+	container-type: inline-size;
+	background: rgba(0,0,0,0.8);
+	text-align: center;
+	max-width: 580px;
+	margin: 0 auto;
+	padding: 0 20px 10px;
+	border-radius: 20px;
+	}
+@container maincontainer (width < 350px) {
+	img.icon {width: 75px;}
+	}
+.time-row {
+	container-name: blockrow;
+	container-type: inline-size;
+	display: grid;
+	gap: 1em;
+	grid-template-columns: repeat(2,minmax(0,1fr));
+	margin-bottom: 1em;
+	}
+@container blockrow (width < 350px) {
+	.time-row .block {
+		grid-column: span 2;
+		padding: .6em 1em;
+		}
+	.time-row .block .label {font-size: 0.5em;}
+	.time-row .block .data {font-size: 1em;}
+	}
+.block .label {
+	color: #A1A1AA;
+	font-size: 0.9em;
+	margin-bottom: 0.4em;
+	}
+.block .data {font-size: 1.3em;}
+.block {
+	background: #09090B;
+	text-align: left;
+	padding: 1.2em;
+	display: block;
+	overflow-wrap: break-word;
+	border: 1px solid #A9A9A9;
+	border-radius: 1em;
+	}
+</style>
+<div class="container">
+	<img src="https://cdn-icons-png.flaticon.com/512/169/169947.png" class="icon">
+	<div class="time-row">
+		<div class="block">
+			<div class="label">Sunrise Today</div>
+			<div class="data">
+				<strong><span id="sunrise"></span></strong>
+			</div>
+		</div>
+		<div class="block">
+			<div class="label">Sunset Today</div>
+			<div class="data">
+				<strong><span id="sunset"></span></strong>
+			</div>
+		</div>
+	</div>
+</div>
