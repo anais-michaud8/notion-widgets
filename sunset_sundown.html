@@ -1,36 +1,30 @@
-<!--- Source: https://codepen.io/ClassyUX/pen/NWmEEYg + HTML/CSS Edited by me --->
+<!--- Source: By Anaïs Michaud (with the help of https://codepen.io/ClassyUX/pen/NWmEEYg) --->
 <!--- Embed link: https://anais-michaud8.github.io/notion-widgets/sunset_sundown.html --->
 <html>
 <head>
 </head>
 <body>
 
-<!--- JS: From --->
+<!--- JS: By Anaïs Michaud --->
 	
 <script>
-// Get today and tomorrow's date
-const date = new Date();
-const datestring = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-let tomorrow = new Date();
-tomorrow.setDate(tomorrow.getDate() + 1);
-const tomorrowstring = tomorrow.getFullYear() + "-" + (tomorrow.getMonth() + 1) + "-" + tomorrow.getDate();
-
-// Coordinates for Jamestown, NY (adjust for your own location)
+// Coordinates for Coventry, UK (adjust for your own location)
 // You can use Google Maps to get your coordinates
 const latitude = 52.419048;
 const longitude = -1.529008;
+const timezone = "Etc/GMT-0";
+const date = "today";
+const time_format = "24";
 
 // Construct URL and parameters to fetch the sunrise and sunset data from the free api at sunrisesunset.io
-const url = `https://api.sunrisesunset.io/json?lat=${latitude}&lng=${longitude}&date_start=${datestring}&date_end=${tomorrowstring}`;
+const url = `https://api.sunrisesunset.io/json?lat=${latitude}&lng=${longitude}&date=${date}&time_format=${time_format}&timezone=${timezone}`;
 
 // Parse the JSON data to obtain the data for displaying the results in the widget
 fetch(url)
 	.then(response => response.json())
 	.then(data => {
-		document.querySelector('#sunrise').innerHTML = data.results[0].sunrise
-		document.querySelector('#sunset').innerHTML = data.results[0].sunset
-		document.querySelector('#sunrisetomorrow').innerHTML = data.results[1].sunrise
-		document.querySelector('#sunsettomorrow').innerHTML = data.results[1].sunset	
+		document.querySelector('#sunrise').innerHTML = data.results.sunrise
+		document.querySelector('#sunset').innerHTML = data.results.sunset
 		})
 	.catch(error => console.error('Error:', error));
 </script>
@@ -38,33 +32,40 @@ fetch(url)
 <!--- CSS: By Anaïs Michaud and https://codepen.io/ClassyUX/pen/NWmEEYg --->
 
 <style>
+body {
+  background: rgba(0, 0, 0, 0);
+  font-family: sans-serif;
+}
 .container {
-	background: #ffffff;
-	max-width: 580px;
+	background: #9BC8F2;
 	margin: 0 auto;
-	padding: 0 20px 10px;
-    border-radius: 20px;
+	padding: 10px 30px;
+  border-radius: 20px;
+  display: inline-block;
 }
 
 .block {
-	background: #f5f5f5;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    border-radius: 6px;
-    margin: 5px 0;
+    text-align: center;
+    margin: 0 auto;
+	  padding: 10px 20px;
+    display: inline-block;
 }
 
 img.icon {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
+    margin: 5px;
     object-fit: contain;
 }
 
-.label {
-    font-size: 1.3em
-    color: #A1A1AA;
+.block .label {
+    font-size: 1.8em;
+    color: #000000;
+    font-weight: 800;
+}
+.block .data {
+    font-size: 1.3em;
+    color: #333333;
     font-weight: 500;
 }
 </style>
@@ -73,18 +74,18 @@ img.icon {
 <!--- HTML: By Anaïs Michaud --->
 
 	<div class="container">
-		<!--- Flaticon (Sun on ocean): https://www.flaticon.com/free-icon/sunset_4814444 --->
-		<img class="icon" src="https://cdn-icons-png.flaticon.com/512/4814/4814444.png"> 
-		<div class="block">
+		<span class="block">
 			<!--- Flaticon (Sunrise): https://www.flaticon.com/free-icon/sunrise_3920688 --->
 			<img class="icon" src="https://cdn-icons-png.flaticon.com/512/3920/3920688.png">
-			<span id="sunrise" class="label"></span>
-		</div>		
-		<div class="block">
+      <div class="label">Sunrise</div>
+			<div id="sunrise" class="data"></div>
+		</span>		
+		<span class="block">
 			<!--- Flaticon (Sunset): https://www.flaticon.com/free-icon/sunset_3920799 --->
 			<img class="icon" src="https://cdn-icons-png.flaticon.com/512/3920/3920799.png">
-			<span id="sunset" class="label"></span>
-		</div>	
+      <div class="label">Sunset</div>
+			<div id="sunset" class="data"></div>
+		</span>	
 	</div>
 	
 </body>
