@@ -37,18 +37,53 @@ fetch(url)
 
 <!--- CSS: By Anaïs Michaud and https://codepen.io/ClassyUX/pen/NWmEEYg --->
 
+<style>
+.container {
+	background: #ffffff;
+	max-width: 580px;
+	margin: 0 auto;
+	padding: 0 20px 10px;
+    border-radius: 20px;
+}
+
+.block {
+	background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 5px 0;
+}
+
+img.icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.label {
+    font-size: 1.3em
+    color: #A1A1AA;
+    font-weight: 500;
+}
+</style>
+
 
 <!--- HTML: By Anaïs Michaud --->
 
 	<div class="container">
-		<img src="https://cdn-icons-png.flaticon.com/512/4814/4814444.png">
+		<!--- Flaticon (Sun on ocean): https://www.flaticon.com/free-icon/sunset_4814444 --->
+		<img class="icon" src="https://cdn-icons-png.flaticon.com/512/4814/4814444.png"> 
 		<div class="block">
-			<img src="https://cdn-icons-png.flaticon.com/512/3920/3920688.png">
-			<span id="sunrise" class="data"></span>
+			<!--- Flaticon (Sunrise): https://www.flaticon.com/free-icon/sunrise_3920688 --->
+			<img class="icon" src="https://cdn-icons-png.flaticon.com/512/3920/3920688.png">
+			<span id="sunrise" class="label"></span>
 		</div>		
 		<div class="block">
-			<img src="https://cdn-icons-png.flaticon.com/512/3920/3920799.png">
-			<span id="sunset" class="data"></span>
+			<!--- Flaticon (Sunset): https://www.flaticon.com/free-icon/sunset_3920799 --->
+			<img class="icon" src="https://cdn-icons-png.flaticon.com/512/3920/3920799.png">
+			<span id="sunset" class="label"></span>
 		</div>	
 	</div>
 	
