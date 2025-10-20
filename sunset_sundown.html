@@ -34,11 +34,14 @@ fetch(url)
 <script>
 
 	// Images of the moon
-	const moon_full = "https://cdn-icons-png.flaticon.com/512/3920/616456.png"; // https://www.flaticon.com/free-icon/full-moon_616456
-	const moon_img_75  = "https://cdn-icons-png.flaticon.com/512/3920/616459.png"; // https://www.flaticon.com/free-icon/moon_616459
-	const moon_img_50  = "https://cdn-icons-png.flaticon.com/512/3920/616461.png"; // https://www.flaticon.com/free-icon/moon_616461
-	const moon_img_25  = "https://cdn-icons-png.flaticon.com/512/3920/616463.png"; // https://www.flaticon.com/free-icon/moon_616463
-	const moon_new   = "https://cdn-icons-png.flaticon.com/512/3920/616465.png"; // https://www.flaticon.com/free-icon/moon_616465
+	const moon_new             = "https://cdn-icons-png.flaticon.com/512/616/616465.png"; // https://www.flaticon.com/free-icon/moon_616465
+	const moon_waxing_crescent = "https://cdn-icons-png.flaticon.com/512/616/616467.png"; // https://www.flaticon.com/free-icon/moon_616467
+	const moon_first_quarter   = "https://cdn-icons-png.flaticon.com/512/616/616469.png"; // https://www.flaticon.com/free-icon/moon_616469
+	const moon_waxing_gibbous  = "https://cdn-icons-png.flaticon.com/512/616/616471.png"; // https://www.flaticon.com/free-icon/moon_616471
+	const moon_full            = "https://cdn-icons-png.flaticon.com/512/616/616456.png"; // https://www.flaticon.com/free-icon/full-moon_616456
+	const moon_waning_gibbous  = "https://cdn-icons-png.flaticon.com/512/616/616459.png"; // https://www.flaticon.com/free-icon/moon_616459
+	const moon_last_quarter    = "https://cdn-icons-png.flaticon.com/512/616/616461.png"; // https://www.flaticon.com/free-icon/moon_616461
+	const moon_waning_crescent = "https://cdn-icons-png.flaticon.com/512/616/616463.png"; // https://www.flaticon.com/free-icon/moon_616463
 
 	// URL to get data for moon
 	const url = "https://moon-api.co/";
@@ -47,6 +50,7 @@ fetch(url)
 	fetch(url)
 	.then(response => response.json())
 	.then(data => {
+		console.log("Data: " + data);
 		if (data.phase == "new") {
 			document.querySelector('#moon_img').src = moon_new;
 			document.querySelector('#moon_data').innerHTML = "New Moon";
@@ -119,7 +123,7 @@ img.icon {
 		</span>	
 		<span class="block">
 			<!--- Flaticon (Moon): See script --->
-			<img class="icon" id="moon_img" src="https://cdn-icons-png.flaticon.com/512/3920/616465.png">
+			<img class="icon" id="moon_img" src="https://cdn-icons-png.flaticon.com/512/616/616465.png">
       		<div class="label">Moon</div>
 			<div id="moon_data" class="data"></div>
 		</span>	
