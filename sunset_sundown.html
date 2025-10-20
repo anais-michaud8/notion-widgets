@@ -104,21 +104,20 @@ fetch(url)
 
 <style>
 body {
-  background: rgba(0, 0, 0, 0);
-  font-family: sans-serif;
+	background: rgba(0, 0, 0, 0);
+	font-family: sans-serif;
 }
 .container {
 	background: #9BC8F2;
 	margin: 0 auto;
 	padding: 10px 30px;
-  border-radius: 20px;
-  display: inline-block;
+  	border-radius: 20px;
+  	display: inline-block;
+	text-align: center;
 }
-
 .block {
-    text-align: center;
     margin: 0 auto;
-	  padding: 10px 20px;
+	padding: 10px 20px;
     display: inline-block;
 }
 
@@ -129,15 +128,20 @@ img.icon {
     object-fit: contain;
 }
 
-.block .label {
+.label {
     font-size: 1.8em;
     color: #000000;
     font-weight: 800;
 }
-.block .data {
+.data {
     font-size: 1.3em;
     color: #333333;
     font-weight: 500;
+}
+.city{
+	font-size: 2em;
+    color: #000000;
+    font-weight: 900;
 }
 </style>
 
@@ -145,6 +149,7 @@ img.icon {
 <!--- HTML: By Anaïs Michaud --->
 
 	<div class="container">
+		<div class="city">Coventry, UK</div>
 		<span class="block">
 			<!--- Flaticon (Sunrise): https://www.flaticon.com/free-icon/sunrise_3920688 --->
 			<img class="icon" src="https://cdn-icons-png.flaticon.com/512/3920/3920688.png">
