@@ -26,7 +26,7 @@ fetch(url)
 		document.querySelector('#sunrise').innerHTML = data.results.sunrise
 		document.querySelector('#sunset').innerHTML = data.results.sunset
 		})
-	.catch(error => console.error('Error:', error));
+	.catch(error => console.error('Error with sun:', error));
 </script>
 
 <!--- Script for the Moon: By Anaïs Michaud --->
@@ -57,10 +57,10 @@ fetch(url)
 		}
 		else {
 			document.querySelector('#moon_img').src = moon_full;
-			document.querySelector('#moon_data').innerHTML = "Full L;
+			document.querySelector('#moon_data').innerHTML = "Full Moon";
 		}
 	})
-	.catch(error => console.error('Error:', error));
+	.catch(error => console.error('Error with moon:', error));
 	
 </script>
 
